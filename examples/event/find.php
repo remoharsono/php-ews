@@ -9,6 +9,7 @@ use \jamesiarmes\PhpEws\ArrayType\NonEmptyArrayOfBaseFolderIdsType;
 use \jamesiarmes\PhpEws\Enumeration\DefaultShapeNamesType;
 use \jamesiarmes\PhpEws\Enumeration\DistinguishedFolderIdNameType;
 use \jamesiarmes\PhpEws\Enumeration\ResponseClassType;
+use \jamesiarmes\PhpEws\Enumeration\ItemQueryTraversalType;
 
 use \jamesiarmes\PhpEws\Type\CalendarViewType;
 use \jamesiarmes\PhpEws\Type\DistinguishedFolderIdType;
@@ -24,7 +25,7 @@ $timezone = 'Eastern Standard Time';
 $host = '';
 $username = '';
 $password = '';
-$version = Client::VERSION_2016;
+$version = Client::VERSION_2013;
 
 $client = new Client($host, $username, $password, $version);
 $client->setTimezone($timezone);
@@ -43,6 +44,7 @@ $request->ParentFolderIds->DistinguishedFolderId[] = $folder_id;
 $request->CalendarView = new CalendarViewType();
 $request->CalendarView->StartDate = $start_date->format('c');
 $request->CalendarView->EndDate = $end_date->format('c');
+$request->Traversal = ItemQueryTraversalType::SHALLOW;
 
 $response = $client->FindItem($request);
 
